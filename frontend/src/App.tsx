@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card";
+import { api } from "./lib/api";
 
 const App = () => {
-  const [expenses, setExpenses] = useState();
+  const [totalExpense, setTotalExpense] = useState(0);
 
   useEffect(() => {
     async function getTotal() {
-      const res = await fetch("/api/v1/expenses/total");
+      const res = await api.expenses["total"].$get();
       const data = await res.json();
-      setExpenses(data);
+      setTotalExpense(data.total);
     }
-
-    console.log(expenses);
     getTotal();
   }, []);
 
@@ -22,7 +21,7 @@ const App = () => {
           <CardTitle>Expense Tracker</CardTitle>
         </CardHeader>
         <CardContent>
-          <p> Total Spent: {expenses?.total}</p>
+          <p> Total Spent: {totalExpense}</p>
         </CardContent>
       </Card>
     </div>

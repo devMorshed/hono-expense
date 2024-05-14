@@ -65,3 +65,5 @@ export const expensesRoute = new Hono()
     fakeExpensesDB.splice(0, fakeExpensesDB.length);
     return c.json(fakeExpensesDB);
   });
+
+
